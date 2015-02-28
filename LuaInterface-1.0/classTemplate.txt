@@ -1,0 +1,23 @@
+
+static constexpr const char* Name = "";
+
+static void registerClass( LuaState& lua )
+{
+    static LuaLib functions[] =
+    {
+        { "new" , LuaConstructor<  >::LuaCFunction },
+        libEnd
+    };
+
+    static LuaLib methods[] =
+    {
+        { "sdf" , LuaMethod( Foo::do ) },
+        { "__gc" , LuaDestructor<  >::LuaCFunction },
+        libEnd
+    };
+
+
+    LuaClass< Foo > luaClass( lua );
+    luaClass.registerFunctions(functions);
+    luaClass.registerMethods(methods);
+}
